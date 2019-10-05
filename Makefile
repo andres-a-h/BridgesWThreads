@@ -3,16 +3,16 @@
 
 .SUFFIXES: .c
 
-	SRCS = traffic.c
-	OBJS = $(SRCS:.c=.o)
-	OUTPUT = traffic
+SRCS = traffic.c
+OBJS = $(SRCS:.c=.o)
+OUTPUT = traffic
 
-	CC = gcc
+CC = gcc
 
-	traffic : $(OBJS)
-		$(CC) -o $(OUTPUT) $(OBJS)
+traffic : $(OBJS)
+	$(CC) -o $(OUTPUT) $(OBJS)
 
-	.PHONY: test clean
+.PHONY: test clean
 
-	clean:
-		rm -f $(OBJS) $(OUTPUT)
+clean:
+	rm -f $(OBJS) $(OUTPUT)
