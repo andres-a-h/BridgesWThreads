@@ -15,6 +15,9 @@ default: traffic
 traffic : $(OBJS)
 	$(CC) $(CFLAGS) $(OUTPUT) $(OBJS)
 
+traffic.o: traffic.c handlecar.c
+	$(CC) $(CFLAGS) -c traffic.c
+
 # create object file handlecar.o for traffic program
 handlecar.o : handlecar.c
 	$(CC) $(CFLAGS) -c handlecar.c
