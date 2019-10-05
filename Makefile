@@ -3,9 +3,9 @@
 
 .SUFFIXES: .c
 
-SRCS = traffic.c
+SRCS = traffic.c handlecar.c
 OBJS = $(SRCS:.c=.o)
-OUTPUT = traffic
+OUTPUT = traffic handlecar
 
 CC = gcc
 
