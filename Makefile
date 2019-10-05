@@ -9,7 +9,7 @@
 
 	CC = gcc
 
-	album : $(OBJS)
+	traffic : $(OBJS)
 		$(CC) -o $(OUTPUT) $(OBJS)
 
 	.PHONY: test clean
