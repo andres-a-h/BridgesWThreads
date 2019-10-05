@@ -12,7 +12,8 @@
 	traffic : $(OBJS)
 		$(CC) -o $(OUTPUT) $(OBJS)
 
-	.PHONY: test clean
+	.PHONY: clean
 
 	clean:
 		rm -f $(OBJS) $(OUTPUT)
+
