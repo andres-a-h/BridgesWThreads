@@ -5,12 +5,19 @@
 
 SRCS = traffic.c handlecar.c
 OBJS = $(SRCS:.c=.o)
-OUTPUT = traffic handlecar
+OUTPUT = traffic
+CFLAGS = -o -g -Wall
 
 CC = gcc
 
+default: traffic
+
 traffic : $(OBJS)
-	$(CC) -o $(OUTPUT) $(OBJS)
+	$(CC) $(CFLAGS) $(OUTPUT) $(OBJS)
+
+# create object file handlecar.o for traffic program
+handlecar.o : handlecar.c
+	$(CC) $(CFLAGS) -c handlecar.c
 
 .PHONY: test clean
 
