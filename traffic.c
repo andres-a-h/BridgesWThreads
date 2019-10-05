@@ -13,12 +13,12 @@
 #include "handlecar.h"
 
 #define MAX_CARS 3
-
+#define TO_HANOVER 1
+#define TO_NORWICH 2
 
 int main(int argc, char *argv[]) {
 
   pthread_t car1, car2;
-  char *direction = TO_HANOVER;
   OneVehicle(TO_HANOVER);
 
   return 0;
