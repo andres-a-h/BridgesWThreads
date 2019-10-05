@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
 #include "handlecar.h"
 
 /* function for thread in charge of handling a single car */
