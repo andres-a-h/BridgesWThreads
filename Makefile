@@ -5,14 +5,14 @@
 
 SRCS = traffic.c handlecar.c
 OBJS = $(SRCS:.c=.o)
-OUTPUT = traffic
+OUTPUT = bridge
 CFLAGS = -o -g -Wall
 
 CC = gcc
 
-default: traffic
+default: bridge
 
-traffic : $(OBJS)
+bridge : $(OBJS)
 	$(CC) $(CFLAGS) $(OUTPUT) $(OBJS)
 
 traffic.o: traffic.c handlecar.c
