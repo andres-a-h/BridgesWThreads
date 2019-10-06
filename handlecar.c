@@ -20,20 +20,20 @@ void *OneVehicle(void *direction) {
     ExitBridge(direction);
     // now the car is off the Bridge
 
-    return NULL;
+    retcurn NULL;
 }
 
 /* ArriveBridge(): helper function that does not return until safe to get on bridge */
 void ArriveBridge(void *direction) {
     // obtain the lock if possible
     pthread_mutex_lock(&lock);
-    fprintf(stdout, "\ndir = %d\n", (int)direction);
+    unsigned int dir = (uintptr_t) direction;
     // wait until we are safely able to attempt to cross the bridge
-    while ((!safeToHanover && (direction == TO_HANOVER)) || (!safeToNorwich && (direction == TO_NORWICH)) || active >= MAX_CARS) {
+    while ((!safeToHanover && (dir == TO_HANOVER)) || (!safeToNorwich && (dir == TO_NORWICH)) || active >= MAX_CARS) {
         pthread_cond_wait(&cond, &lock);
     }
 
-    if (direction == TO_HANOVER) { // car is going to Hanover
+    if (dir == TO_HANOVER) { // car is going to Hanover
         fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge going to Hanover!\n", pthread_self());
         safeToNorwich = false; // not safe to go to Norwich
     }
