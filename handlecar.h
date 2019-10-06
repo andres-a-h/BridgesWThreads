@@ -3,6 +3,9 @@
 
 // forward-declare the lock
 extern pthread_mutex_t lock; // source: https://stackoverflow.com/questions/37083224/how-to-define-pthread-and-mutex-lock-in-c-files-that-depend-on-each-other
+extern pthread_cond_t cond;
+extern bool safe;
+extern int active;
 
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction);

@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     // create condition variable - return error if it fails
-    if (pthread_cond_t_init(&cond, NULL) != 0) {
+    if (pthread_cond_init(&cond, NULL) != 0) {
         fprintf(stderr, "\n Error: Conditional Variable creation failed!\n");
         return 2;
     }
