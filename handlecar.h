@@ -10,8 +10,8 @@ extern int active;
 extern int waiting;
 
 // define const vars
-#define MAX_CARS 3
-#define NUM_THREADS 10
+#define MAX_CARS 5
+#define NUM_THREADS 20
 #define TO_HANOVER 0
 #define TO_NORWICH 1
 
