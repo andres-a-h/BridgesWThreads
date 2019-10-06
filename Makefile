@@ -12,14 +12,12 @@ CC = gcc
 traffic : $(OBJS)
 	$(CC) $(CFLAGS) $(OUTPUT) $(OBJS)
 
-traffic.o: traffic.c handlecar.h
-	$(CC) $(CFLAGS) -c traffic.c
+traffic.o: handlecar.h
 
 # create object file handlecar.o for traffic program
-handlecar.o : handlecar.c handlecar.h
-	$(CC) $(CFLAGS) -c handlecar.c
+handlecar.o : handlecar.h
 
-.PHONY: test clean
+.PHONY: clean
 
 clean:
 	rm -f $(OBJS) $(OUTPUT)
