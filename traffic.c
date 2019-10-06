@@ -56,25 +56,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // create a thread for each car - first half one way then switch directions
-    for (int j = NUM_THREADS; j < 2*NUM_THREADS; j++) {
-        fprintf(stdout, "=====> main() : a car is arriving at the bridge! (creating thread) <=====\n");
-        waiting++; // add to waiting list of cars
-
-        if (j < (2*NUM_THREADS - NUM_THREADS/2)) {
-            rc = pthread_create(&car[j], NULL, OneVehicle, (void *) TO_HANOVER);
-        }
-        else {
-            rc = pthread_create(&car[j], NULL, OneVehicle, (void *) TO_NORWICH);
-        }
-
-        if (rc) { // if thread creation fails
-            fprintf(stdout, "Error: could not create thread! rc = %d\n", rc);
-            waiting--;
-            exit(-1);
-        }
-    }
-
     pthread_exit(NULL);
 
     return 0;
