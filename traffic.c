@@ -18,15 +18,14 @@
 #define TO_HANOVER 0
 #define TO_NORWICH 1
 
-int active = 0; // number of cars currently on the Bridge
-bool safe = true; // determines whether it is safe to cross the bridge
-pthread_mutex_t lock; // the lock
-pthread_cond_t cond; // condition variable
-
 int main(int argc, char *argv[]) {
 
     pthread_t car[MAX_CARS];
     int rc;
+    int active = 0; // number of cars currently on the Bridge
+    bool safe = true; // determines whether it is safe to cross the bridge
+    pthread_mutex_t lock; // the lock
+    pthread_cond_t cond; // condition variable
 
     // create a mutex lock - return error if it fails
     if (pthread_mutex_init(&lock, NULL) != 0) {
