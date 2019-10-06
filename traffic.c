@@ -21,7 +21,7 @@ int waiting = 0; // number of cars waiting
 bool safeToHanover = true; // determines if it is safe to cross to Hanover
 bool safeToNorwich = true; // determines if it is safe to cross to Norwich
 pthread_mutex_t lock; // the lock
-pthread_cond_t cond; // condition variable
+pthread_cond_t cond, cond2; // condition variable
 
 int main(int argc, char *argv[]) {
 

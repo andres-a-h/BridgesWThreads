@@ -28,12 +28,14 @@ void ArriveBridge(void *direction) {
     // obtain the lock if possible
     pthread_mutex_lock(&lock);
     unsigned int dir = (uintptr_t) direction;
-    if (dir == TO_HANOVER) {
-        fprintf(stdout, "\n\twe are going to hanover %d\n", TO_HANOVER);
-    }
-    // wait until we are safely able to attempt to cross the bridge
-    while ((!safeToHanover && (dir == TO_HANOVER)) || (!safeToNorwich && (dir == TO_NORWICH)) || active >= MAX_CARS) {
+
+    // wait until we are safely able to attempt to cross the bridge to Hanover
+    while ((!safeToHanover && (dir == TO_HANOVER)) || active >= MAX_CARS) {
         pthread_cond_wait(&cond, &lock);
+    }
+    // wait until we are safely able to attempt to cross the bridge to Norwich
+    while ((!safeToNorwich && (dir == TO_NORWICH)) || active >= MAX_CARS) {
+        pthread_cond_wait(&cond2, &lock);
     }
 
     if (dir == TO_HANOVER) { // car is going to Hanover
@@ -81,9 +83,14 @@ void ExitBridge(void *direction) {
         safeToHanover = true;
         safeToNorwich = true;
     }
-    // wakeup at least one thread that are waiting to enter Bridge
-    pthread_cond_signal(&cond);
 
+    // wakeup at least one thread that are waiting to enter Bridge
+    if (direction == TO_HANOVER) {
+        pthread_cond_signal(&cond);
+    }
+    else {
+        pthread_cond_signal(&cond2);
+    }
     // release
     pthread_mutex_unlock(&lock);
 }
