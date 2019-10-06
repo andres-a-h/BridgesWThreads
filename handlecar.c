@@ -28,26 +28,24 @@ void ArriveBridge(void *direction) {
     // obtain the lock if possible
     pthread_mutex_lock(&lock);
 
-    if (direction == TO_HANOVER) { // car wants to go to Hanover
-        // wait until we are safely able to attempt to cross the bridge
-        while (!safeToHanover || active >= MAX_CARS) {
-            pthread_cond_wait(&cond, &lock);
-        }
-        safeToNorwich = false; // it is not safe to go to Norwich
+    // wait until we are safely able to attempt to cross the bridge
+    while ((!safeToHanover && (direction == TO_HANOVER)) || (!safeToNorwich && (direction == TO_NORWICH)) || active >= MAX_CARS) {
+        pthread_cond_wait(&cond, &lock);
+    }
+
+    if (direction == TO_HANOVER) { // car is going to Hanover
         fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge going to Hanover!\n", pthread_self());
+        safeToNorwich = false; // not safe to go to Norwich
     }
-    else { // car wants to go to Norwich
-        while (!safeToNorwich || active >= MAX_CARS) {
-            pthread_cond_wait(&cond, &lock);
-        }
-        safeToHanover = false; // it is not safe to go to Hanover
+    else { // car is going to Norwich
         fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge going to Norwich!\n", pthread_self());
+        safeToHanover = false; // not safe to go to Hanover
     }
+
 
     // do whatever we need to do, enter the bridge!
     active++; // increment number of cars currently on the bridge
     waiting--; // car enters bridge, decrementing amount of waiting cars
-    //fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge!\n", pthread_self());
 
     // release the lock once we are done with it
     pthread_mutex_unlock(&lock);
