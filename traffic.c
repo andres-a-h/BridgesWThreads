@@ -14,7 +14,8 @@
 
 #define MAX_CARS 3
 #define NUM_THREADS 3
-#define direction(x) ( (x) ? "TO_HANOVER" : "TO_NORWICH")
+#define TO_HANOVER 0
+#define TO_NORWICH 1
 
 int main(int argc, char *argv[]) {
 
