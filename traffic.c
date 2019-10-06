@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
         fprintf(stdout, "=====> main() : a car is arriving at the bridge! (creating thread) <=====\n");
         waiting++; // add to waiting list of cars
 
-        if (j < (2*NUM_THREADS - NUMTHREADS/2)) {
+        if (j < (2*NUM_THREADS - NUM_THREADS/2)) {
             rc = pthread_create(&car[j], NULL, OneVehicle, (void *) TO_HANOVER);
         }
         else {
