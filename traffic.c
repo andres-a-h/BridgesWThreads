@@ -13,9 +13,8 @@
 #include "handlecar.h"
 
 #define MAX_CARS 3
-#define TO_HANOVER 1
-#define TO_NORWICH 2
 #define NUM_THREADS 3
+#define direction(x) ( (x) ? "TO_HANOVER" : "TO_NORWICH")
 
 int main(int argc, char *argv[]) {
 
@@ -23,7 +22,7 @@ int main(int argc, char *argv[]) {
     int rc;
     for (int i = 0; i < NUM_THREADS; i++) {
         fprintf(stdout, "main() : creating thread");
-        rc = pthread_create(&car[i], NULL, OneVehicle, TO_HANOVER);
+        rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_HANOVER);
 
         if (rc) { // if thread creation fails
             fprintf(stdout, "Error: could not create thread! rc = %d\n", rc);
