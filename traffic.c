@@ -15,11 +15,22 @@
 #define MAX_CARS 3
 #define TO_HANOVER 1
 #define TO_NORWICH 2
+#define NUM_THREADS 3
 
 int main(int argc, char *argv[]) {
 
-  pthread_t car1, car2;
-  OneVehicle(TO_HANOVER);
+    pthread_t car[NUM_THREADS];
+    int rc;
+    for (int i = 0; i < NUM_THREADS; i++) {
+        fprintf(stdout, "main() : creating thread");
+        rc = pthread_create(&car[i], NULL, OneVehicle, TO_HANOVER);
 
-  return 0;
+        if (rc) { // if thread creation fails
+            fprintf(stdout, "Error: could not create thread! rc = %d\n", rc);
+            exit(-1);
+        }
+    }
+    pthread_exit(NULL);
+
+    return 0;
 }
