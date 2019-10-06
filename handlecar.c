@@ -31,7 +31,7 @@ void ArriveBridge(void *direction) {
 
     // wait until we are safely able to attempt to cross the bridge
     while (!safe || active > 3) {
-        pthread_cond_wait(%cond, &lock);
+        pthread_cond_wait(&cond, &lock);
     }
 
     // do whatever we need to do, enter the bridge!
