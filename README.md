@@ -1,8 +1,8 @@
 # BridgesWThreads
 
 <h2>1. Usage</h2>
-[Usage] ./test
-make sure to 'make' before executing
+    [Usage] ./test
+    make sure to 'make' before executing
 
 <h2>2. Assumptions </h2>
 - The user defines variables with proper values in 'handlecar.h'.
