@@ -10,7 +10,7 @@
 
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction) {
-    unsigned int x = (uintptr_t) direction;
+    unsigned int x = (uintptr_t) direction; // source: https://stackoverflow.com/questions/26805461/why-do-i-get-cast-from-pointer-to-integer-of-different-size-error
 
     ArriveBridge(direction);
     // now the car is on the Bridge
@@ -19,6 +19,8 @@ void *OneVehicle(void *direction) {
 
     ExitBridge(direction);
     // now the car is off the Bridge
+
+    return NULL;
 }
 
 /* ArriveBridge(): helper function that does not return until safe to get on bridge */
