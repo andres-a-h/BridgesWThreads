@@ -5,11 +5,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <stdint.h>
 #include "handlecar.h"
 
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction) {
-    int x = (int)direction;
+    unsigned int x = (uintptr_t) direction;
 
     ArriveBridge(direction);
     // now the car is on the Bridge

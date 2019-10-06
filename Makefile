@@ -10,7 +10,7 @@ CFLAGS = -Wall -g
 CC = gcc
 
 traffic : $(OBJS)
-	$(CC) -o $(OUTPUT) $(OBJS)
+	$(CC) -pthread -Wall -o $(OUTPUT) $(OBJS)
 
 traffic.o: handlecar.h
 

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <stdint.h>
 #include "handlecar.h"
 
 #define MAX_CARS 3
