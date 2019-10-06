@@ -12,7 +12,6 @@
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction) {
     unsigned int dir = (uintptr_t) direction; // source: https://stackoverflow.com/questions/26805461/why-do-i-get-cast-from-pointer-to-integer-of-different-size-error
-    sleep(3);
     ArriveBridge(direction);
     // now the car is on the Bridge
 
