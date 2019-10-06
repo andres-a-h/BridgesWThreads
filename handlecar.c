@@ -36,7 +36,7 @@ void ArriveBridge(void *direction) {
 
     // do whatever we need to do, enter the bridge!
     active++; // increment number of cars currently on the bridge
-    fprintf(stdout, "++++++++++> I am car %d, and I am entering the bridge!\n", pthread_self());
+    fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge!\n", pthread_self());
 
     // release the lock once we are done with it
     pthread_mutex_unlock(&lock);
@@ -44,10 +44,10 @@ void ArriveBridge(void *direction) {
 
 /* OnBridge(): helper function prints state of bridge and waiting cars */
 void OnBridge(void *direction) {
-    fprintf(stdout, "I am the only car on the bridge\n");
+    fprintf(stdout, "\tI am the only car on the bridge\n");
 }
 
 /* ExitBridge(): helper function removes the car from the bridge */
 void ExitBridge(void *direction) {
-    fprintf(stdout, "----------> I am car %d, and I am exiting the bridge!\n", pthread_self());
+    fprintf(stdout, "\t----------> I am car %d, and I am exiting the bridge!\n", pthread_self());
 }
