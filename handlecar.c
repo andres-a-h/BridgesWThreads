@@ -29,7 +29,7 @@ void ArriveBridge(void *direction) {
     pthread_mutex_lock(&lock);
     unsigned int dir = (uintptr_t) direction;
     if (dir == TO_HANOVER) {
-        fprintf(stdout, "\n\twe are going to hanover %d\n", dir);
+        fprintf(stdout, "\n\twe are going to hanover %d\n", TO_HANOVER);
     }
     // wait until we are safely able to attempt to cross the bridge
     while ((!safeToHanover && (dir == TO_HANOVER)) || (!safeToNorwich && (dir == TO_NORWICH)) || active >= MAX_CARS) {
