@@ -45,6 +45,7 @@ void ArriveBridge(void *direction) {
 
 /* OnBridge(): helper function prints state of bridge and waiting cars */
 void OnBridge(void *direction) {
+    sleep(1);
     fprintf(stdout, "\t I am car %d, here is the current state of the bridge:\n", pthread_self());
     fprintf(stdout, "\t\t Cars on bridge: %d\n\t\t Cars waiting: %d\n", active, waiting);
 }
