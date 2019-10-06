@@ -19,7 +19,7 @@
 #define TO_NORWICH 1
 
 int active = 0; // number of cars currently on the Bridge
-boolean safe = true; // determines whether it is safe to cross the bridge
+bool safe = true; // determines whether it is safe to cross the bridge
 pthread_mutex_t lock; // the lock
 pthread_cond_t cond; // condition variable
 
