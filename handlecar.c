@@ -30,7 +30,7 @@ void ArriveBridge(void *direction) {
     pthread_mutex_lock(&lock);
 
     // wait until we are safely able to attempt to cross the bridge
-    while (!safe || active > MAX_CARS) {
+    while (!safe || active >= MAX_CARS) {
         pthread_cond_wait(&cond, &lock);
     }
 
