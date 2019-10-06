@@ -1,3 +1,8 @@
+/**
+* @author: Andres Hernandez, Dartmouth College, CS 58
+* @date: Fall 2019
+**/
+
 #ifndef HANDLECAR_H_
 #define HANDLECAR_H_
 

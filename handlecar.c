@@ -1,3 +1,8 @@
+/**
+* @author: Andres Hernandez, Dartmouth College, CS 58
+* @date: Fall 2019
+**/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
