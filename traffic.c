@@ -17,16 +17,25 @@
 #define TO_HANOVER 0
 #define TO_NORWICH 1
 
+int active = 0; // number of cars currently on the Bridge
+boolean safe = true; // determines whether it is safe to cross the bridge
+pthread_mutex_t lock; // the lock
+pthread_cond_t cond; // condition variable
+
 int main(int argc, char *argv[]) {
 
     pthread_t car[MAX_CARS];
     int rc;
-    pthread_mutex_t lock;
 
     // create a mutex lock - return error if it fails
     if (pthread_mutex_init(&lock, NULL) != 0) {
         fprintf(stderr, "\n Error: Mutex creation failed!\n");
         return 1;
+    }
+    // create condition variable - return error if it fails
+    if (pthread_cond_t(&cond, NULL) != 0) {
+        fprintf(stderr, "\n Error: Conditional Variable creation failed!\n");
+        return 2;
     }
 
     // create a thread for each car

@@ -25,7 +25,20 @@ void *OneVehicle(void *direction) {
 
 /* ArriveBridge(): helper function that does not return until safe to get on bridge */
 void ArriveBridge(void *direction) {
-    fprintf(stdout, "I am getting on the bridge\n");
+    // obtain the lock if possible
+    pthread_mutex_lock(&lock);
+
+    // wait until we are safely able to attempt to cross the bridge
+    while (!safe || active > 3) {
+        pthread_cond_wait(%cond, &lock);
+    }
+
+    // do whatever we need to do, enter the bridge!
+    active++; // increment number of cars currently on the bridge
+    fprintf(stdout, "===> I am car %d, and I am entering the bridge!\n", pthread_self());
+
+    // release the lock once we are done with it
+    pthread_mutex_unlock(&lock);
 }
 
 /* OnBridge(): helper function prints state of bridge and waiting cars */
