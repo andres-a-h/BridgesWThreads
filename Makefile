@@ -3,21 +3,23 @@
 
 .SUFFIXES: .c
 
-SRCS = traffic.c handlecar.c
-OBJS = $(SRCS:.c=.o)
-OUTPUT = traffic
-CFLAGS = -Wall -g
-CC = gcc
-
-traffic : $(OBJS)
-	$(CC) -pthread -Wall -o $(OUTPUT) $(OBJS)
-
-traffic.o: handlecar.h
-
-# create object file handlecar.o for traffic program
-handlecar.o : handlecar.h
-
-.PHONY: clean
+LINK_TARGET = test
+OBJS = traffic.o handlecar.o
+REBUILDABLES = $(OBJS) $(LINK_TARGET)
+LIBS = -pthread
 
 clean:
-	rm -f $(OBJS) $(OUTPUT)
+    rm -f $(REBUILDABLES)
+    echo Clean done
+
+all: $(LINK_TARGET)
+    echo All done
+
+$(LINK_TARGET) : $(OBJS)
+    gcc -g -o $@ $^ $(LIBS)
+
+$.o : $.c
+    gcc -g -o $@ -c $<
+
+Main.o : ThreadFunction.h
+ThreadFunction.o : ThreadFunction.h
