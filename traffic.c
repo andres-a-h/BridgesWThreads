@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
     }
 
     // create a thread for each car - first half one way then switch directions
-    for (int j = NUM_THREADS; i < 2*NUM_THREADS; i++) {
+    for (int j = NUM_THREADS; j < 2*NUM_THREADS; j++) {
         fprintf(stdout, "=====> main() : a car is arriving at the bridge! (creating thread) <=====\n");
         waiting++; // add to waiting list of cars
 
