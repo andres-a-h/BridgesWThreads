@@ -6,11 +6,11 @@
 SRCS = traffic.c handlecar.c
 OBJS = $(SRCS:.c=.o)
 OUTPUT = traffic
-CFLAGS = -g -Wall
+CFLAGS = -Wall -g
 CC = gcc
 
 traffic : $(OBJS)
-	$(CC) -o $@ $< $(CFLAGS) $(OUTPUT) $(OBJS)
+	$(CC) -o $(OUTPUT) $(OBJS)
 
 traffic.o: handlecar.h
 
