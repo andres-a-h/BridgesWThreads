@@ -27,7 +27,7 @@ void *OneVehicle(void *direction) {
 void ArriveBridge(void *direction) {
     // obtain the lock if possible
     pthread_mutex_lock(&lock);
-
+    fprintf("\ndir = %d\n", (int) direction)
     // wait until we are safely able to attempt to cross the bridge
     while ((!safeToHanover && (direction == TO_HANOVER)) || (!safeToNorwich && (direction == TO_NORWICH)) || active >= MAX_CARS) {
         pthread_cond_wait(&cond, &lock);
