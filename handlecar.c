@@ -45,13 +45,29 @@ void ArriveBridge(void *direction) {
 
 /* OnBridge(): helper function prints state of bridge and waiting cars */
 void OnBridge(void *direction) {
+    // obtain lock to securely check state of bridge
+    // we do not want variables to change before we can report to user
+    pthread_mutex_lock(&lock);
+
     sleep(1);
     fprintf(stdout, "\t I am car %d, here is the current state of the bridge:\n", pthread_self());
     fprintf(stdout, "\t\t Cars on bridge: %d\n\t\t Cars waiting: %d\n", active, waiting);
+
+    // release lock now that we are done checking
+    pthread_mutex_unlock(&lock);
 }
 
 /* ExitBridge(): helper function removes the car from the bridge */
 void ExitBridge(void *direction) {
+    // obtain lock to ensure exclusive access to vars
+    pthread_mutex_lock(&lock);
+
     active--; // car leaves bridge, so no longer active
     fprintf(stdout, "\t----------> I am car %d, and I am exiting the bridge!\n\n", pthread_self());
+
+    // wakeup at least one thread that are waiting to enter Bridge
+    pthread_cond_signal(&cond);
+
+    // release
+    pthread_mutex_unlock(&lock);
 }
