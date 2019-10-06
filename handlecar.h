@@ -7,6 +7,8 @@ extern pthread_cond_t cond;
 extern bool safe;
 extern int active;
 extern int waiting;
+
+// define const vars
 #define MAX_CARS 3
 #define NUM_THREADS 10
 #define TO_HANOVER 0
