@@ -7,6 +7,10 @@ extern pthread_cond_t cond;
 extern bool safe;
 extern int active;
 extern int waiting;
+#define MAX_CARS 3;
+#define NUM_THREADS 10;
+#define TO_HANOVER 0;
+#define TO_NORWICH 1;
 
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction);

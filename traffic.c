@@ -14,11 +14,7 @@
 #include <stdbool.h>
 #include "handlecar.h"
 
-#define MAX_CARS 10
-#define TO_HANOVER 0
-#define TO_NORWICH 1
-
-pthread_t car[MAX_CARS];
+pthread_t car[NUM_THREADS];
 int rc;
 int active = 0; // number of cars currently on the Bridge
 int waiting = 0; // number of cars waiting
@@ -41,7 +37,7 @@ int main(int argc, char *argv[]) {
     }
 
     // create a thread for each car
-    for (int i = 0; i < MAX_CARS; i++) {
+    for (int i = 0; i < NUM_THREADS; i++) {
         fprintf(stdout, "=====> main() : a car is arriving at the bridge! (creating thread) <=====\n");
         waiting++; // add to waiting list of cars
         rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_HANOVER);
