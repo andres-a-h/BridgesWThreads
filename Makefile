@@ -8,6 +8,8 @@ OBJS = traffic.o handlecar.o
 REBUILDABLES = $(OBJS) $(LINK_TARGET)
 LIBS = -pthread
 
+.PHONY: clean all
+	
 clean:
     rm -f $(REBUILDABLES)
     echo Clean done
