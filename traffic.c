@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
     // create a thread for each car
     for (int i = 0; i < MAX_CARS; i++) {
-        fprintf(stdout, "====> main() : creating thread\n");
+        fprintf(stdout, "=====> main() : a car is arriving at the bridge! (creating thread) <=====\n");
         rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_HANOVER);
 
         if (rc) { // if thread creation fails
