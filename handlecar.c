@@ -82,14 +82,19 @@ void ExitBridge(void *direction) {
     if (active == 0) {
         safeToHanover = true;
         safeToNorwich = true;
+
     }
 
     // wakeup at least one thread that are waiting to enter Bridge
     if (direction == TO_HANOVER) {
-        pthread_cond_signal(&cond);
+        for (int j = 0; j < (MAX_CARS - active); j++) {
+            pthread_cond_signal(&cond);
+        }
     }
     else {
-        pthread_cond_signal(&cond2);
+        for (int j = 0; j < (MAX_CARS - active); j++) {
+            pthread_cond_signal(&cond2);
+        }
     }
     // release
     pthread_mutex_unlock(&lock);
