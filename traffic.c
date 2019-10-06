@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     pthread_t car[NUM_THREADS];
     int rc;
     for (int i = 0; i < NUM_THREADS; i++) {
-        fprintf(stdout, "main() : creating thread");
+        fprintf(stdout, "====> main() : creating thread\n");
         rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_HANOVER);
 
         if (rc) { // if thread creation fails
