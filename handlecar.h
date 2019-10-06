@@ -6,6 +6,7 @@ extern pthread_mutex_t lock; // source: https://stackoverflow.com/questions/3708
 extern pthread_cond_t cond;
 extern bool safe;
 extern int active;
+extern int waiting;
 
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction);
