@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include "handlecar.h"
 
-#define MAX_CARS 3
+#define MAX_CARS 10
 #define TO_HANOVER 0
 #define TO_NORWICH 1
 
