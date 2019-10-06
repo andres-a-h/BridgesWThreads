@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "handlecar.h"
 
 #define MAX_CARS 3
