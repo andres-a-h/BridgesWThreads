@@ -16,7 +16,6 @@
 
 /* function for thread in charge of handling a single car */
 void *OneVehicle(void *direction) {
-    unsigned int dir = (uintptr_t) direction; // source: https://stackoverflow.com/questions/26805461/why-do-i-get-cast-from-pointer-to-integer-of-different-size-error
     ArriveBridge(direction);
     // now the car is on the Bridge
 
@@ -32,16 +31,12 @@ void *OneVehicle(void *direction) {
 void ArriveBridge(void *direction) {
     // obtain the lock if possible
     pthread_mutex_lock(&lock);
-    unsigned int dir = (uintptr_t) direction;
+    unsigned int dir = (uintptr_t) direction; // source: https://stackoverflow.com/questions/26805461/why-do-i-get-cast-from-pointer-to-integer-of-different-size-error
 
     // wait until we are safely able to attempt to cross the bridge to Hanover
     while ((!safeToHanover && (dir == TO_HANOVER)) || (!safeToNorwich && (dir == TO_NORWICH)) || active >= MAX_CARS) {
         pthread_cond_wait(&cond, &lock);
     }
-    // wait until we are safely able to attempt to cross the bridge to Norwich
-    //while ((!safeToNorwich && (dir == TO_NORWICH)) || active >= MAX_CARS) {
-    //    pthread_cond_wait(&cond2, &lock);
-    //}
 
     if (dir == TO_HANOVER) { // car is going to Hanover
         fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge going to Hanover!\n", pthread_self());
@@ -63,16 +58,11 @@ void ArriveBridge(void *direction) {
 
 /* OnBridge(): helper function prints state of bridge and waiting cars */
 void OnBridge(void *direction) {
-    // obtain lock to securely check state of bridge
-    // we do not want variables to change before we can report to user
-    //pthread_mutex_lock(&lock);
 
     sleep(1); // make sure cars don't travel so fast that other cars can't get on at same time
     fprintf(stdout, "\t I am car %d, here is the current state of the bridge:\n", pthread_self());
     fprintf(stdout, "\t\t Cars on bridge: %d\n\t\t Cars waiting: %d\n", active, waiting);
 
-    // release lock now that we are done checking
-    //pthread_mutex_unlock(&lock);
 }
 
 /* ExitBridge(): helper function removes the car from the bridge */
@@ -87,7 +77,6 @@ void ExitBridge(void *direction) {
     if (active == 0) {
         safeToHanover = true;
         safeToNorwich = true;
-
     }
 
     // wakeup at least one thread that are waiting to enter Bridge
