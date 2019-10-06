@@ -20,7 +20,7 @@ void *OneVehicle(void *direction) {
     ExitBridge(direction);
     // now the car is off the Bridge
 
-    retcurn NULL;
+    return NULL;
 }
 
 /* ArriveBridge(): helper function that does not return until safe to get on bridge */
