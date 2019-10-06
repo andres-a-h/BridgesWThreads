@@ -94,6 +94,7 @@ void ExitBridge(void *direction) {
     else {
         for (int j = 0; j < (MAX_CARS - active); j++) {
             pthread_cond_signal(&cond2);
+            printf("loop\n");
         }
     }
     // release
