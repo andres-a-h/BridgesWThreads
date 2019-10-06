@@ -28,15 +28,26 @@ void ArriveBridge(void *direction) {
     // obtain the lock if possible
     pthread_mutex_lock(&lock);
 
-    // wait until we are safely able to attempt to cross the bridge
-    while (!safe || active >= MAX_CARS) {
-        pthread_cond_wait(&cond, &lock);
+    if (direction == TO_HANOVER) { // car wants to go to Hanover
+        // wait until we are safely able to attempt to cross the bridge
+        while (!safeToHanover || active >= MAX_CARS) {
+            pthread_cond_wait(&cond, &lock);
+        }
+        safeToNorwich = false; // it is not safe to go to Norwich
+        fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge going to Hanover!\n", pthread_self());
+    }
+    else { // car wants to go to Norwich
+        while (!safeToNorwich || active >= MAX_CARS) {
+            pthread_cond_wait(&cond, &lock);
+        }
+        safeToHanover = false; // it is not safe to go to Hanover
+        fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge going to Norwich!\n", pthread_self());
     }
 
     // do whatever we need to do, enter the bridge!
     active++; // increment number of cars currently on the bridge
     waiting--; // car enters bridge, decrementing amount of waiting cars
-    fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge!\n", pthread_self());
+    //fprintf(stdout, "\t++++++++++> I am car %d, and I am entering the bridge!\n", pthread_self());
 
     // release the lock once we are done with it
     pthread_mutex_unlock(&lock);
@@ -64,6 +75,11 @@ void ExitBridge(void *direction) {
     active--; // car leaves bridge, so no longer active
     fprintf(stdout, "\t----------> I am car %d, and I am exiting the bridge!\n\n", pthread_self());
 
+    // if the bridge is empty, then it is safe for either to cross
+    if (active == 0) {
+        safeToHanover = true;
+        safeToNorwich = true;
+    }
     // wakeup at least one thread that are waiting to enter Bridge
     pthread_cond_signal(&cond);
 

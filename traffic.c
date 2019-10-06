@@ -18,7 +18,8 @@ pthread_t car[NUM_THREADS];
 int rc;
 int active = 0; // number of cars currently on the Bridge
 int waiting = 0; // number of cars waiting
-bool safe = true; // determines whether it is safe to cross the bridge
+bool safeToHanover = true; // determines if it is safe to cross to Hanover
+bool safeToNorwich = true; // determines if it is safe to cross to Norwich
 pthread_mutex_t lock; // the lock
 pthread_cond_t cond; // condition variable
 
@@ -40,7 +41,13 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < NUM_THREADS; i++) {
         fprintf(stdout, "=====> main() : a car is arriving at the bridge! (creating thread) <=====\n");
         waiting++; // add to waiting list of cars
-        rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_HANOVER);
+
+        if (i % 2 == 0) {
+            rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_HANOVER);
+        }
+        else {
+            rc = pthread_create(&car[i], NULL, OneVehicle, (void *) TO_NORWICH);
+        }
 
         if (rc) { // if thread creation fails
             fprintf(stdout, "Error: could not create thread! rc = %d\n", rc);
