@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "handlecar.h"
 
 /* function for thread in charge of handling a single car */
