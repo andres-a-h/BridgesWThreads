@@ -8,15 +8,6 @@ OBJS = traffic.o handlecar.o
 REBUILDABLES = $(OBJS) $(LINK_TARGET)
 LIBS = -pthread
 
-.PHONY: clean all
-
-clean:
-	rm -f $(REBUILDABLES)
-	echo Clean done
-
-all: $(LINK_TARGET)
-	echo All done
-
 $(LINK_TARGET) : $(OBJS)
 	gcc -g -o $@ $^ $(LIBS)
 
@@ -25,3 +16,12 @@ $.o : $.c
 
 Main.o : ThreadFunction.h
 ThreadFunction.o : ThreadFunction.h
+
+.PHONY: clean all
+
+clean:
+	rm -f $(REBUILDABLES)
+	echo Clean done
+
+all: $(LINK_TARGET)
+	echo All done
